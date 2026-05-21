@@ -1,0 +1,41 @@
+/* 1. Обнуляющие стили (CSS Reset) */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden; /* Скрывает полосы прокрутки для полноэкранного 3D */
+  background-color: white;
+}
+
+/* 2. Базовые настройки темы и шрифтов */
+:root {
+  --text: #6b6375;
+  --bg: #fff;
+  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
+
+  font: 18px/145% var(--sans);
+  letter-spacing: 0.18px;
+  color-scheme: light dark;
+  color: var(--text);
+  background: var(--bg);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  @media (max-width: 1024px) {
+    font-size: 16px;
+  }
+}
+
+
+/* 3. Главный контейнер для Three.js */
+#root {
+  width: 100vw;       /* Исправлено с dvh на vw (ширина экрана) */
+  height: 100vh;      /* Полноэкранный размер для холста */
+  height: 100dvh;     /* Динамическая высота для мобильных */
+  display: block;     /* Убран flex, так как canvas занимает всю площадь */
+}
