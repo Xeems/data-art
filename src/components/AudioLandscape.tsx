@@ -11,7 +11,7 @@ export default function AudioLandscape({ analyser }: AudioLandscapeProps) {
   // Реф для облака точек
   const pointsRef = useRef<THREE.Points>(null);
   // Реф для массива частот, чтобы не выделять память каждый кадр
-  const dataArray = useRef<Uint8Array | null>(null);
+ const dataArray = useRef<Uint8Array<ArrayBuffer> | null>(null);
 
   useFrame((state) => {
     if (!analyser || !pointsRef.current) return;

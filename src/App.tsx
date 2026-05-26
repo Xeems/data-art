@@ -5,7 +5,6 @@ import './App.css'
 import TrackUploader from './components/TrackUploader'
 import { Canvas } from '@react-three/fiber';
 
-import SphereV1 from './components/SphereV1';
 import AudioSphere from './components/AudioSphere';
 
 function App() {

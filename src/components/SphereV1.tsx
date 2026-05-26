@@ -9,7 +9,7 @@ interface AudioSphereProps {
 
 export default function SphereV1({ analyser }: AudioSphereProps) {
   const pointsRef = useRef<THREE.Points>(null);
-  const dataArray = useRef<Uint8Array | null>(null);
+  const dataArray = useRef<Uint8Array<ArrayBuffer> | null>(null);
   const initialPositions = useRef<Float32Array | null>(null);
   const baseSphereRadius = 18;
 

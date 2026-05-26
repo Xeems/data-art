@@ -1,4 +1,4 @@
-import React, { useRef, useMemo, useEffect } from 'react';
+import  { useRef, useMemo, } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import * as THREE from 'three';
@@ -9,12 +9,12 @@ interface AudioSphereProps {
 
 export default function AudioSphere({ analyser }: AudioSphereProps) {
   const pointsRef = useRef<THREE.Points>(null);
-  const dataArray = useRef<Uint8Array | null>(null);
+  const dataArray = useRef<Uint8Array<ArrayBuffer> | null>(null);
   
   const baseSphereRadius = 18;
   const totalPoints = 8000;
 
-  // Алгоритм Фибоначчи для идеально равноудаленных точек
+  // Алгоритм Фибоначчи для сферы равноудаленных точек
   const [positions, initialDirections] = useMemo(() => {
     const pos = new Float32Array(totalPoints * 3);
     const dirs = new Float32Array(totalPoints * 3);
@@ -57,11 +57,6 @@ export default function AudioSphere({ analyser }: AudioSphereProps) {
     return new THREE.CanvasTexture(canvas);
   }, []);
 
-  useEffect(() => {
-    if (analyser) {
-      analyser.smoothingTimeConstant = 0.45;
-    }
-  }, [analyser]);
 
   useFrame((state) => {
     if (!analyser || !pointsRef.current) return;
@@ -181,12 +176,13 @@ export default function AudioSphere({ analyser }: AudioSphereProps) {
             count={totalPoints}
             array={positions}
             itemSize={3}
+            args={[positions, 3]}
           />
         </bufferGeometry>
         <pointsMaterial 
           size={0.18} 
           sizeAttenuation={true}
-          transparent={true} 
+          //transparent={true} 
           opacity={0.9}      
           vertexColors={true}
           map={sharpCircleTexture}
